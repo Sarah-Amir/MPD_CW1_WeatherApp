@@ -10,11 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -32,6 +37,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Check for Internet Connection
+        if (checkConnection()){
+            Toast.makeText(getApplicationContext(),"Connected to Internet",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Not Connected to Internet",Toast.LENGTH_SHORT).show();
+        }
+
         //load the list of locations defined in array.xml into an ArrayAdapter
         ArrayAdapter adapter;
         adapter=ArrayAdapter.createFromResource(this,R.array.locations, android.R.layout.simple_spinner_dropdown_item);
@@ -39,6 +52,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerLocationSelector.setAdapter(adapter);
         spinnerLocationSelector.setOnItemSelectedListener(this);
 
+    }
+
+    public boolean checkConnection() {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+        if(networkInfo==null)
+            return false;
+        if (networkInfo.getType()==ConnectivityManager.TYPE_WIFI){
+            //connection is a wifi connection
+            Toast.makeText(this,"WIFI connection",Toast.LENGTH_SHORT).show();
+        }
+        if (networkInfo.getType()==ConnectivityManager.TYPE_MOBILE){
+            //connection is a mobile network connection
+            Toast.makeText(this,"Mobile Data connection",Toast.LENGTH_SHORT).show();
+        }
+        return networkInfo.isConnected();
     }
 
     @Override

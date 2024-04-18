@@ -677,10 +677,14 @@ public class GlasgowFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // // Add a marker in current location and move the camera
+        //mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+        //set the zoom level for Google Map
+        float zoomLevel=10.0f;
+        // Add a marker in current location and move the camera
         LatLng cityLocation = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(cityLocation).title(location));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(cityLocation));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cityLocation,zoomLevel));
     }
 
 
