@@ -1,10 +1,8 @@
 package com.lab2.amir_sarah_s2340285;
 
-//
 // Name                 Sarah Amir
 // Student ID           S2340285
 // Programme of Study   BSc Computing
-//
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -51,10 +49,7 @@ import java.util.Map;
  */
 public class GlasgowFragment extends Fragment implements OnMapReadyCallback {
 
-    private TextView rssFeed;
-    private TextView listDataDisplay;
     private String result;
-    private String url1="";
     private String urlSource="https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579"; // 3-day Forecast
     private String urlSource1="https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2648579"; //Current Forecast
     private String location="Glasgow";
@@ -114,8 +109,6 @@ public class GlasgowFragment extends Fragment implements OnMapReadyCallback {
         View v= inflater.inflate(R.layout.fragment_glasgow, container, false);
 
         // Set up the links to the graphical components
-        //rssFeed = (TextView) v.findViewById(R.id.rssFeed);
-        //listDataDisplay=(TextView)v.findViewById(R.id.listDataDisplay);
         cityName=(TextView)v.findViewById(R.id.cityName);
         //Current Weather Widgets
         cDay=(TextView)v.findViewById(R.id.currentDay);
@@ -239,8 +232,6 @@ public class GlasgowFragment extends Fragment implements OnMapReadyCallback {
 
     public void startProgress()
     {
-        // Run network access on a separate thread;
-        //new Thread(new Task(urlSource)).start();
         // Approach 1:
         Thread thread1 = new Thread(new Task(urlSource));
         Thread thread2=new Thread(new Task(urlSource1));
@@ -629,7 +620,12 @@ public class GlasgowFragment extends Fragment implements OnMapReadyCallback {
             fDay.setText(first_Day);
             fDayWeather.setText(firstDayWeather);
             fDayMinTemperature.setText(firstDayMinTemperature);
-            fDayMaxTemperature.setText(firstDayMaxTemperature);
+            //fDayMaxTemperature.setText(firstDayMaxTemperature);
+            if(firstDayMaxTemperature==null){
+                fDayMaxTemperature.setText(currentTemperature);
+            }else{
+                fDayMaxTemperature.setText(firstDayMaxTemperature);
+            }
             fDaySunrise.setText(firstDaySunrise);
             fDaySunset.setText(firstDaySunset);
             fDayWindSpeed.setText(firstDayWindSpeed);
@@ -742,8 +738,6 @@ public class GlasgowFragment extends Fragment implements OnMapReadyCallback {
                     .replaceAll("</georss:point>", "</georss_point>");
 
             Log.e("MyTag - cleaned",result);
-
-
             //
             // Cleaned xml data to be parsed
             //
@@ -811,25 +805,6 @@ public class GlasgowFragment extends Fragment implements OnMapReadyCallback {
                 Log.e("MyTag","IO error during parsing");
             }
 
-            // Now update the TextView to display raw XML data
-            // Probably not the best way to update TextView
-            // but we are just getting started !
-
-        /*MainActivity.this.runOnUiThread(new Runnable()
-        {
-            public void run() {
-                Log.d("UI thread", "I am the UI thread");
-                rawDataDisplay.setText(result);
-            }
-        });*/
-
-            /*rssFeed.post(new Runnable()
-            {
-                public void run() {
-                    Log.d("UI thread", "I am the UI thread");
-                    rssFeed.setText(result);
-                }
-            });*/
 
         }
 

@@ -48,10 +48,8 @@ import java.util.Map;
  */
 public class OrlandoFragment extends Fragment implements OnMapReadyCallback {
 
-    private TextView rssFeed;
-    private TextView listDataDisplay;
+
     private String result;
-    private String url1 = "";
     private String urlSource = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/4167147"; // 3-day Forecast
     private String urlSource1 = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/4167147"; //Current Forecast
     private String location="Orlando";
@@ -111,8 +109,6 @@ public class OrlandoFragment extends Fragment implements OnMapReadyCallback {
         View v = inflater.inflate(R.layout.fragment_orlando, container, false);
 
         // Set up the links to the graphical components
-        //rssFeed = (TextView) v.findViewById(R.id.rssFeed);
-        //listDataDisplay=(TextView)v.findViewById(R.id.listDataDisplay);
         cityName = (TextView) v.findViewById(R.id.cityName);
         //Current Weather Widgets
         cDay = (TextView) v.findViewById(R.id.currentDay);
@@ -622,7 +618,12 @@ public class OrlandoFragment extends Fragment implements OnMapReadyCallback {
             fDay.setText(first_Day);
             fDayWeather.setText(firstDayWeather);
             fDayMinTemperature.setText(firstDayMinTemperature);
-            fDayMaxTemperature.setText(firstDayMaxTemperature);
+            //fDayMaxTemperature.setText(firstDayMaxTemperature);
+            if(firstDayMaxTemperature==null){
+                fDayMaxTemperature.setText(currentTemperature);
+            }else{
+                fDayMaxTemperature.setText(firstDayMaxTemperature);
+            }
             fDaySunrise.setText(firstDaySunrise);
             fDaySunset.setText(firstDaySunset);
             fDayWindSpeed.setText(firstDayWindSpeed);
@@ -790,25 +791,7 @@ public class OrlandoFragment extends Fragment implements OnMapReadyCallback {
                 Log.e("MyTag", "IO error during parsing");
             }
 
-            // Now update the TextView to display raw XML data
-            // Probably not the best way to update TextView
-            // but we are just getting started !
 
-        /*MainActivity.this.runOnUiThread(new Runnable()
-        {
-            public void run() {
-                Log.d("UI thread", "I am the UI thread");
-                rawDataDisplay.setText(result);
-            }
-        });*/
-
-            /*rssFeed.post(new Runnable()
-            {
-                public void run() {
-                    Log.d("UI thread", "I am the UI thread");
-                    rssFeed.setText(result);
-                }
-            });*/
 
         }
 

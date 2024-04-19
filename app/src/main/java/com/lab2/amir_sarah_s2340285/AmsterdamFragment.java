@@ -49,10 +49,7 @@ import java.util.Map;
 public class AmsterdamFragment extends Fragment implements OnMapReadyCallback {
 
 
-    private TextView rssFeed;
-    private TextView listDataDisplay;
     private String result;
-    private String url1 = "";
     private String urlSource = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2759794"; // 3-day Forecast
     private String urlSource1 = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2759794"; //Current Forecast
     private String location="Amsterdam";
@@ -623,7 +620,12 @@ public class AmsterdamFragment extends Fragment implements OnMapReadyCallback {
             fDay.setText(first_Day);
             fDayWeather.setText(firstDayWeather);
             fDayMinTemperature.setText(firstDayMinTemperature);
-            fDayMaxTemperature.setText(firstDayMaxTemperature);
+            //fDayMaxTemperature.setText(firstDayMaxTemperature);
+            if(firstDayMaxTemperature==null){
+                fDayMaxTemperature.setText(currentTemperature);
+            }else{
+                fDayMaxTemperature.setText(firstDayMaxTemperature);
+            }
             fDaySunrise.setText(firstDaySunrise);
             fDaySunset.setText(firstDaySunset);
             fDayWindSpeed.setText(firstDayWindSpeed);
@@ -791,25 +793,7 @@ public class AmsterdamFragment extends Fragment implements OnMapReadyCallback {
                 Log.e("MyTag", "IO error during parsing");
             }
 
-            // Now update the TextView to display raw XML data
-            // Probably not the best way to update TextView
-            // but we are just getting started !
 
-        /*MainActivity.this.runOnUiThread(new Runnable()
-        {
-            public void run() {
-                Log.d("UI thread", "I am the UI thread");
-                rawDataDisplay.setText(result);
-            }
-        });*/
-
-            /*rssFeed.post(new Runnable()
-            {
-                public void run() {
-                    Log.d("UI thread", "I am the UI thread");
-                    rssFeed.setText(result);
-                }
-            });*/
 
         }
 

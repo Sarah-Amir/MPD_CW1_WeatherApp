@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent==spinnerLocationSelector){
             String text=(String) spinnerLocationSelector.getSelectedItem();
-            if(text.equals("GCU Glasgow")){
+            if(text.equals("Glasgow")){
                 //Show glasgow fragment
                 glasgowFragment=new GlasgowFragment();
                 //Replace fragmentContainerView in activity_main.xml with glasgowFragment
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 glasgowTransaction.replace(R.id.fragmentContainerView,glasgowFragment);
                 glasgowTransaction.commit();
 
-            }else if (text.equals("GCU London")){
+            }else if (text.equals("London")){
                 //Show london fragment
                 londonFragment=new LondonFragment();
                 //Replace fragmentContainerView in activity_main.xml with londonFragment
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 FragmentTransaction londonTransaction=londonManager.beginTransaction();
                 londonTransaction.replace(R.id.fragmentContainerView,londonFragment);
                 londonTransaction.commit();
-            }else if (text.equals("GCNYC New York")){
+            }else if (text.equals("New York")){
                 //Show newyork fragment
                 newyorkFragment=new NewyorkFragment();
                 //Replace fragmentContainerView in activity_main.xml with newyorkFragment

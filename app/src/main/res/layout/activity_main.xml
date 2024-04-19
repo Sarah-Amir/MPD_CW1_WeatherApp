@@ -18,6 +18,12 @@
         android:theme="?attr/actionBarTheme"
         app:title="Weather Application"
         app:titleTextColor="@color/AntiqueWhite" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textColor="@color/white"
+        android:text="Student ID: S2340285"/>
 
     <Spinner
         android:id="@+id/spinnerSelectLocation"

@@ -2,9 +2,9 @@
 <!-- Sarah Amir, Student ID: S2340285-->
 <resources>
     <string-array name="locations">
-        <item>GCU Glasgow</item>
-        <item>GCU London</item>
-        <item>GCNYC New York</item>
+        <item>Glasgow</item>
+        <item>London</item>
+        <item>New York</item>
         <item>Orlando</item>
         <item>Mississauga</item>
         <item>Amsterdam</item>
